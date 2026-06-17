@@ -3,9 +3,9 @@ plugins {
     id("org.allaymc.gradle.plugin") version "0.2.1"
 }
 
-group = "miroshka.allayshop"
+group = "miroshka.midas"
 version = "1.0.0"
-description = "Configurable form shop for AllayMC"
+description = "Configurable market, buyer and auto-buyer plugin for AllayMC"
 
 repositories {
     mavenCentral()
@@ -22,8 +22,8 @@ java {
 allay {
     api = "0.27.0"
     plugin {
-        name = "AllayShop"
-        entrance = ".AllayShopPlugin"
+        name = "Midas"
+        entrance = "miroshka.midas.MidasPlugin"
         authors += "Miroshka"
         dependency(name = "EconomyAPI", version = ">=0.2.2")
         dependency(name = "Aconomy", version = ">=0.2.0")
