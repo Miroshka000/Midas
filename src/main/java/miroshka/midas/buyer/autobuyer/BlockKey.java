@@ -13,7 +13,7 @@ public record BlockKey(
         var position = block.getPosition();
         return new BlockKey(
                 block.getDimension().getWorld().getName(),
-                block.getDimension().getDimensionInfo().dimensionId(),
+                block.getDimension().getDimensionType().getId(),
                 position.x(),
                 position.y(),
                 position.z()
