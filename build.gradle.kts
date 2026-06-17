@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "miroshka.midas"
-version = "1.0.0"
+version = "0.1.0"
 description = "Configurable market, buyer and auto-buyer plugin for AllayMC"
 
 repositories {
@@ -20,7 +20,7 @@ java {
 }
 
 allay {
-    api = "0.27.0"
+    api = "0.28.0"
     plugin {
         name = "Midas"
         entrance = "miroshka.midas.MidasPlugin"
