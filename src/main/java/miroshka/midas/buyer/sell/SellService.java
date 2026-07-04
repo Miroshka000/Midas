@@ -32,13 +32,14 @@ public final class SellService {
             return SellResult.fail(messages.tr(player, MessageKey.SELL_REJECTED));
         }
         inventoryService.removeSellable(player, request.product(), request.amount());
-        if (!economyService.deposit(player, request.price())) {
+        if (!economyService.deposit(player, request.product().getCurrency(), request.price())) {
             return SellResult.fail(messages.tr(player, MessageKey.SELL_DEPOSIT_FAILED));
         }
         return SellResult.success(messages.tr(player, MessageKey.SELL_SUCCESS, Map.of(
                 "product", request.product().getName(),
                 "amount", request.amount(),
-                "price", request.price()
+                "price", request.price(),
+                "currency", request.product().getCurrency()
         )));
     }
 }

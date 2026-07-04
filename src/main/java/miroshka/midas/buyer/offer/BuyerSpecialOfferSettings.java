@@ -27,6 +27,7 @@ public class BuyerSpecialOfferSettings extends OkaeriConfig {
         product.setName("Звезда Незера");
         product.setDescription("Специальная цена уже указана в конфиге.");
         product.setMinAmount(1);
+        product.setCurrency("lumens");
         product.setPrice(50000);
         product.setAmountScrollEnabled(false);
         product.setItem(new BuyerProduct.ItemFilter("minecraft:nether_star", 0, null, List.of(), Map.of()));

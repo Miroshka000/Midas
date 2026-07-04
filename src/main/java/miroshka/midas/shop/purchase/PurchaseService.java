@@ -23,7 +23,7 @@ public final class PurchaseService {
         if (request.amount() <= 0) {
             return PurchaseResult.fail(messages.tr(player, MessageKey.PURCHASE_INVALID_AMOUNT));
         }
-        if (!economyService.withdraw(player, request.price())) {
+        if (!economyService.withdraw(player, request.product().getCurrency(), request.price())) {
             return PurchaseResult.fail(messages.tr(player, MessageKey.PURCHASE_NOT_ENOUGH_MONEY));
         }
         deliveryService.deliver(player, request.product(), request.amount());

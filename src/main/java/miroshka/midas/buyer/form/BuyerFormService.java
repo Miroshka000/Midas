@@ -95,7 +95,7 @@ public final class BuyerFormService {
 
         var amounts = amounts(product);
         var labels = amounts.stream()
-                .map(amount -> priceLine(amount, priceFor(product, amount, basePrice), 1.0))
+                .map(amount -> priceLine(product, amount, priceFor(product, amount, basePrice), 1.0))
                 .toList();
         Forms.custom()
                 .title(product.getName())
@@ -115,20 +115,22 @@ public final class BuyerFormService {
     }
 
     private String productButtonText(BuyerProduct product, long price, double multiplier) {
-        return product.getName() + "\n" + priceLine(product.getMinAmount(), price, multiplier);
+        return product.getName() + "\n" + priceLine(product, product.getMinAmount(), price, multiplier);
     }
 
-    private String priceLine(int amount, long price, double multiplier) {
+    private String priceLine(BuyerProduct product, int amount, long price, double multiplier) {
         if (multiplier > 1.0) {
             return messages.tr(MessageKey.BUYER_PRICE_BOOST_LINE, Map.of(
                     "amount", amount,
                     "price", price,
+                    "currency", product.getCurrency(),
                     "multiplier", String.format(java.util.Locale.US, "%.2f", multiplier)
             ));
         }
         return messages.tr(MessageKey.PRODUCT_PRICE_LINE, Map.of(
                 "amount", amount,
-                "price", price
+                "price", price,
+                "currency", product.getCurrency()
         ));
     }
 

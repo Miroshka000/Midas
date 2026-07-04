@@ -11,6 +11,7 @@ import org.allaymc.api.entity.interfaces.EntityPlayer;
 import org.allaymc.api.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public final class AutoBuyerMenuService {
     }
 
     private void process(EntityPlayer player, ItemStack[] items) {
-        var total = 0L;
+        var payments = new LinkedHashMap<String, Long>();
         var rejected = false;
         var originalItems = new ArrayList<ItemStack>();
         var leftovers = new ArrayList<ItemStack>();
@@ -58,25 +59,32 @@ public final class AutoBuyerMenuService {
             var product = match.get();
             var sellAmount = itemStack.getCount() - itemStack.getCount() % product.getMinAmount();
             var leftover = itemStack.getCount() - sellAmount;
-            total += BuyerPriceCalculator.calculate(product, sellAmount);
+            payments.merge(product.getCurrency(), BuyerPriceCalculator.calculate(product, sellAmount), Long::sum);
             if (leftover > 0) {
                 var copy = itemStack.copy();
                 copy.setCount(leftover);
                 leftovers.add(copy);
             }
         }
-        if (total > 0 && !economyService.deposit(player, total)) {
+        if (!payments.isEmpty() && !economyService.depositAll(player, payments)) {
             returnItems(player, originalItems);
             messages.send(player, MessageKey.AUTO_BUYER_DEPOSIT_FAILED);
             return;
         }
         returnItems(player, leftovers);
-        if (total > 0) {
-            messages.send(player, MessageKey.AUTO_BUYER_SOLD, Map.of("price", total));
+        if (!payments.isEmpty()) {
+            messages.send(player, MessageKey.AUTO_BUYER_SOLD, Map.of("price", formatPayments(payments)));
         }
         if (rejected) {
             messages.send(player, MessageKey.SELL_REJECTED);
         }
+    }
+
+    private String formatPayments(Map<String, Long> payments) {
+        return payments.entrySet().stream()
+                .map(entry -> entry.getValue() + " " + entry.getKey())
+                .reduce((left, right) -> left + ", " + right)
+                .orElse("0");
     }
 
     private void returnItems(EntityPlayer player, List<ItemStack> items) {

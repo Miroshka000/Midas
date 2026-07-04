@@ -93,7 +93,7 @@ public final class ShopFormService {
 
         var amounts = amounts(product);
         var labels = amounts.stream()
-                .map(amount -> priceLine(amount, priceFor(product, amount, basePrice), 0))
+                .map(amount -> priceLine(product, amount, priceFor(product, amount, basePrice), 0))
                 .toList();
         Forms.custom()
                 .title(product.getName())
@@ -113,20 +113,22 @@ public final class ShopFormService {
     }
 
     private String productButtonText(ShopProduct product, long price, int discountPercent) {
-        return product.getName() + "\n" + priceLine(product.getMinAmount(), price, discountPercent);
+        return product.getName() + "\n" + priceLine(product, product.getMinAmount(), price, discountPercent);
     }
 
-    private String priceLine(int amount, long price, int discountPercent) {
+    private String priceLine(ShopProduct product, int amount, long price, int discountPercent) {
         if (discountPercent > 0) {
             return messages.tr(MessageKey.PRODUCT_PRICE_DISCOUNT_LINE, Map.of(
                     "amount", amount,
                     "price", price,
+                    "currency", product.getCurrency(),
                     "discount", discountPercent
             ));
         }
         return messages.tr(MessageKey.PRODUCT_PRICE_LINE, Map.of(
                 "amount", amount,
-                "price", price
+                "price", price,
+                "currency", product.getCurrency()
         ));
     }
 

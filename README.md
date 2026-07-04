@@ -41,8 +41,8 @@ Midas creates two main YAML files in the plugin data folder:
 
 | File | Description |
 |------|-------------|
-| `shop.yml` | Shop title, currency, categories, products and shop special offers. |
-| `buyer.yml` | Buyer title, sell categories, buyer special offers and auto-buyer terminals. |
+| `shop.yml` | Shop title, categories, per-product currencies, products and shop special offers. |
+| `buyer.yml` | Buyer title, sell categories, per-product currencies, buyer special offers and auto-buyer terminals. |
 
 ### 📝 Product Options
 | Option | Description |

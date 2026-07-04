@@ -2,8 +2,12 @@ package miroshka.midas.shop.economy;
 
 import org.allaymc.api.entity.interfaces.EntityPlayer;
 
-public interface EconomyService {
-    boolean withdraw(EntityPlayer player, long amount);
+import java.util.Map;
 
-    boolean deposit(EntityPlayer player, long amount);
+public interface EconomyService {
+    boolean withdraw(EntityPlayer player, String currency, long amount);
+
+    boolean deposit(EntityPlayer player, String currency, long amount);
+
+    boolean depositAll(EntityPlayer player, Map<String, Long> amountsByCurrency);
 }

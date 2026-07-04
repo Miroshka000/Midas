@@ -24,9 +24,6 @@ public class ShopConfig extends OkaeriConfig {
     @Comment("Shop form title.")
     private String title = "Магазин";
 
-    @Comment("Aconomy/EconomyAPI currency used for shop prices.")
-    private String currency = "coins";
-
     @Comment("Categories shown in the main shop form.")
     private List<ShopCategory> categories = defaultCategories();
 
@@ -56,6 +53,7 @@ public class ShopConfig extends OkaeriConfig {
         carrot.setDescription("Обычная морковь для еды или торговли");
         carrot.setType(ShopProductType.ITEM);
         carrot.setMinAmount(8);
+        carrot.setCurrency("coins");
         carrot.setPrice(4000);
         carrot.setAmountScrollEnabled(true);
         carrot.setItem(new ShopProduct.ItemReward("minecraft:carrot", 0, null, List.of(), Map.of()));
@@ -66,6 +64,7 @@ public class ShopConfig extends OkaeriConfig {
         fixed.setDescription("Эффект на 60 секунд");
         fixed.setType(ShopProductType.EFFECT);
         fixed.setMinAmount(1);
+        fixed.setCurrency("lumens");
         fixed.setPrice(2500);
         fixed.setAmountScrollEnabled(false);
         fixed.setEffect(new ShopProduct.EffectReward("minecraft:speed", 1, 60, false));

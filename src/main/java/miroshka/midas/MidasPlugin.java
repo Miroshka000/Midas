@@ -39,7 +39,7 @@ public final class MidasPlugin extends Plugin {
         this.buyerConfig = BuyerConfig.loadConfig(dataFolder);
         var messageService = new MessageService();
 
-        var economyService = new EconomyApiService(shopConfig.getCurrency());
+        var economyService = new EconomyApiService();
         var shopCatalog = new ShopCatalog(shopConfig);
         var deliveryService = new ShopDeliveryService(Server.getInstance());
         var purchaseService = new PurchaseService(economyService, deliveryService, messageService);

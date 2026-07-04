@@ -55,6 +55,7 @@ public class BuyerConfig extends OkaeriConfig {
         carrot.setName("Морковь");
         carrot.setDescription("Обычная морковь.");
         carrot.setMinAmount(8);
+        carrot.setCurrency("coins");
         carrot.setPrice(4000);
         carrot.setAmountScrollEnabled(true);
         carrot.setMaxAmount(640);

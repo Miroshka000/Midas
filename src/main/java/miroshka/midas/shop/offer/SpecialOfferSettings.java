@@ -28,6 +28,7 @@ public class SpecialOfferSettings extends OkaeriConfig {
         product.setDescription("Специальная цена уже указана в конфиге");
         product.setType(ShopProductType.COMMAND);
         product.setMinAmount(1);
+        product.setCurrency("lumens");
         product.setPrice(15000);
         product.setAmountScrollEnabled(false);
         product.getCommand().setCommands(List.of("crate key give {player} vip 1"));

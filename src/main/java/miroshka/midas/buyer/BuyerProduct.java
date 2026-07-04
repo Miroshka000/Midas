@@ -1,6 +1,7 @@
 package miroshka.midas.buyer;
 
 import eu.okaeri.configs.OkaeriConfig;
+import eu.okaeri.configs.annotation.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,8 @@ public class BuyerProduct extends OkaeriConfig {
     private String name = "";
     private String description = "";
     private int minAmount = 1;
+    @Comment("EconomyAPI currency paid for this product: coins or lumens.")
+    private String currency = "coins";
     private long price = 0;
     private boolean amountScrollEnabled = true;
     private int maxAmount = 64;
