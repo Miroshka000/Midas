@@ -1,5 +1,6 @@
 package miroshka.midas;
 
+import lombok.Getter;
 import miroshka.midas.buyer.BuyerCatalog;
 import miroshka.midas.buyer.autobuyer.AutoBuyerListener;
 import miroshka.midas.buyer.autobuyer.AutoBuyerMenuService;
@@ -27,7 +28,9 @@ import org.allaymc.api.server.Server;
 import org.slf4j.Logger;
 
 public final class MidasPlugin extends Plugin {
+    @Getter
     private ShopConfig shopConfig;
+    @Getter
     private BuyerConfig buyerConfig;
     private SpecialOfferService shopOfferService;
     private BuyerOfferService buyerOfferService;
@@ -83,14 +86,6 @@ public final class MidasPlugin extends Plugin {
     @Override
     public void onDisable() {
         logger().info("Midas disabled");
-    }
-
-    public ShopConfig getShopConfig() {
-        return shopConfig;
-    }
-
-    public BuyerConfig getBuyerConfig() {
-        return buyerConfig;
     }
 
     private Logger logger() {
